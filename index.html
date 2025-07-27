@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dewi Idda Rohmana | AI & Game Development Educator | Python & NLP Specialist | Curriculum Designer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1F7D53;
+      --secondary: #255F38;
+      --dark-green: #18230F;
+      --medium-green: #27391C;
+      --light: #edf2f4;
+      --dark: #0a1a23;
+      --accent: #2D936C;
+      --bg: #18230F;
+      --text: #ffffff;
+      --card-bg: #27391C;
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f9f7;
+      --text: #18230F;
+      --card-bg: #ffffff;
+      --secondary: #1F7D53;
+      --primary: #255F38;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Radiant Background Elements */
+    .radiant-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .radiant-element {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.15;
+      animation: float 15s infinite linear;
+    }
+
+    .radiant-1 {
+      background: var(--primary);
+      width: 300px;
+      height: 300px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .radiant-2 {
+      background: var(--secondary);
+      width: 400px;
+      height: 400px;
+      bottom: 10%;
+      right: 15%;
+      animation-delay: 3s;
+    }
+
+    .radiant-3 {
+      background: var(--accent);
+      width: 250px;
+      height: 250px;
+      top: 50%;
+      left: 30%;
+      animation-delay: 6s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      25% {
+        transform: translate(50px, 50px) rotate(90deg);
+      }
+
+      50% {
+        transform: translate(100px, 0) rotate(180deg);
+      }
+
+      75% {
+        transform: translate(50px, -50px) rotate(270deg);
+      }
+
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 5%;
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+      background: rgba(24, 35, 15, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(245, 249, 247, 0.8);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      z-index: 10;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .pronouns {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: rgba(31, 125, 83, 0.2);
+      color: var(--primary);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(31, 125, 83, 0.1);
+      border-radius: 50px;
+      font-size: 0.9rem;
+    }
+
+    .badge i {
+      color: var(--primary);
+    }
+
+    .hero-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-link {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transform: perspective(500px);
+    }
+
+    .hero-link.secondary {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .hero-link:hover {
+      transform: perspective(500px) translateZ(20px);
+      box-shadow: 0 10px 20px rgba(31, 125, 83, 0.3);
+    }
+
+    .hero-image {
+      position: absolute;
+      right: 5%;
+      width: 40%;
+      max-width: 600px;
+      height: 80%;
+      background: url('Dewi.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      transform-style: preserve-3d;
+      animation: float-image 8s ease-in-out infinite;
+      border: 5px solid var(--primary);
+    }
+
+    @keyframes float-image {
+
+      0%,
+      100% {
+        transform: translateY(0) rotateX(0) rotateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+      }
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 8rem 5%;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    /* About Section */
+    .about-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .about-text p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .skill {
+      padding: 0.5rem 1.5rem;
+      background: rgba(31, 125, 83, 0.1);
+      border-radius: 50px;
+      font-weight: 500;
+    }
+
+    /* Experience Section */
+    .experience-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .experience-item {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transform-style: preserve-3d;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .experience-item:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .experience-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .experience-company {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-duration {
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .experience-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+      opacity: 0.8;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .experience-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .experience-skill {
+      padding: 0.3rem 1rem;
+      background: rgba(31, 125, 83, 0.1);
+      border-radius: 50px;
+      font-size: 0.8rem;
+    }
+
+    .experience-description {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .experience-description li {
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .experience-description li:before {
+      content: "▹";
+      position: absolute;
+      left: -1.2rem;
+      color: var(--primary);
+    }
+
+    .experience-outcome {
+      background: rgba(31, 125, 83, 0.1);
+      padding: 0.8rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-left: 3px solid var(--primary);
+    }
+
+    .experience-outcome i {
+      color: var(--primary);
+    }
+
+    /* Education Section */
+    .education-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .education-item {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transform-style: preserve-3d;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .education-item:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .education-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .education-degree {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .education-duration {
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .education-grade {
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    /* Organizations Section */
+    .org-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .org-item {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transform-style: preserve-3d;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .org-item:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .org-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .org-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .org-position {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .org-duration {
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .org-description {
+      margin-top: 1rem;
+      line-height: 1.8;
+    }
+
+    .org-association {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+      opacity: 0.8;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    /* Contact Section */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      perspective: 1000px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--secondary);
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      transform: perspective(500px) translateZ(0);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      transform: perspective(500px) translateZ(10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      transform: perspective(500px);
+    }
+
+    .submit-btn:hover {
+      transform: perspective(500px) translateZ(20px);
+      box-shadow: 0 10px 20px rgba(31, 125, 83, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-green);
+      padding: 3rem 5%;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-links a {
+      color: var(--light);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      transform: perspective(500px) translateZ(0);
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+      transform: perspective(500px) translateZ(20px);
+    }
+
+    .copyright {
+      color: var(--light);
+      opacity: 0.8;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 992px) {
+      .hero-image {
+        display: none;
+      }
+
+      .hero-content {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .hero-badges,
+      .hero-links {
+        justify-content: center;
+      }
+
+      .hero-location {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--dark-green);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        z-index: 99;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .experience-header,
+      .org-header {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Radiant Background Elements -->
+  <div class="radiant-elements">
+    <div class="radiant-element radiant-1"></div>
+    <div class="radiant-element radiant-2"></div>
+    <div class="radiant-element radiant-3"></div>
+  </div>
+
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <a href="#" class="logo">Dewi Idda</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#organizations">Organizations</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Dewi Idda Rohmana</h1>
+        <span class="pronouns">She/Her</span>
+        <div class="hero-badges">
+          <span class="badge">
+            <i class="fas fa-check-circle"></i>
+            Verified Educator
+          </span>
+          <span class="badge">
+            <i class="fas fa-star"></i>
+            Open to Work
+          </span>
+        </div>
+        <p>AI and Game Developer Enthusiast</p>
+        <div class="hero-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Pati, Central Java, Indonesia</span>
+        </div>
+        <div class="hero-links">
+          <a href="#contact" class="hero-link">Contact Info</a>
+          <a href="#" class="hero-link secondary">500+ Connections</a>
+        </div>
+      </div>
+      <div class="hero-image"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Passionate AI & Coding Educator with 4+ years of experience specializing in Python, Machine Learning, and
+            Game Development. I transform complex technical concepts into engaging learning experiences for students of
+            all ages. As a certified Microsoft Educator and NLP mentor, I've designed curricula for Orbit Future
+            Academy, Algorithmics, and BrightChamps, while mentoring 500+ students in AI fundamentals, data science, and
+            creative coding. </p>
+          <p>My approach combines hands-on projects with industry-relevant skills, preparing students for real-world
+            tech challenges through personalized coaching, virtual coding competitions, and project-based learning.</p>
+
+          <h3 style="margin-top: 2rem; color: var(--primary);">Top Skills</h3>
+          <div class="skills-container">
+            <span class="skill">Python (Programming Language)</span>
+            <span class="skill">Machine Learning</span>
+            <span class="skill">Natural Language Processing (NLP)</span>
+            <span class="skill">Game Design</span>
+            <span class="skill">AI Education</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+      <h2 class="section-title">Experience</h2>
+      <div class="experience-container">
+        <div class="experience-item">
+          <div class="experience-header">
+            <div>
+              <h3 class="experience-title">NLP and LLM Mentor</h3>
+              <p class="experience-company">Dunia Coding - Freelance</p>
+            </div>
+            <span class="experience-duration">Nov 2024 - Present · 9 mos</span>
+          </div>
+          <div class="experience-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Yogyakarta, Indonesia · Remote</span>
+          </div>
+          <div class="experience-skills">
+            <span class="experience-skill">NLP Development</span>
+            <span class="experience-skill">LLM</span>
+            <span class="experience-skill">Python (Programming Language)</span>
+            <span class="experience-skill">Hugging Face</span>
+          </div>
+          <p>Specializing in Natural Language Processing (NLP) and Large Language Models (LLM).</p>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <div>
+              <h3 class="experience-title">Ekstrakurikuler Coding Teacher</h3>
+              <p class="experience-company">Sekolah Murid Merdeka · Part-time</p>
+            </div>
+            <span class="experience-duration">Oct 2024 - Present · 10 mos</span>
+          </div>
+          <div class="experience-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Semarang, Central Java, Indonesia · Remote</span>
+          </div>
+          <div class="experience-skills">
+            <span class="experience-skill">Scratch</span>
+            <span class="experience-skill">Roblox Studio</span>
+            <span class="experience-skill">MIT App Inventor</span>
+            <span class="experience-skill">Python</span>
+            <span class="experience-skill">Lesson Plan Development</span>
+          </div>
+          <p>Developed extracurricular coding programs for K–12 students, emphasizing problem-solving through Python and
+            web development</p>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <div>
+              <h3 class="experience-title">Game Design and Python Tutor</h3>
+              <p class="experience-company">Algorithmics Global · Full-time</p>
+            </div>
+            <span class="experience-duration">Aug 2024 - Present · 1 yr</span>
+          </div>
+          <div class="experience-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Indonesia · Remote</span>
+          </div>
+          <div class="experience-skills">
+            <span class="experience-skill">Roblox Studio</span>
+            <span class="experience-skill">Unity</span>
+            <span class="experience-skill">Blender</span>
+            <span class="experience-skill">OOP</span>
+            <span class="experience-skill">Python</span>
+            <span class="experience-skill">PyGame</span>
+            <span class="experience-skill">PyQt5</span>
+            <span class="experience-skill">Data Science</span>
+            <span class="experience-skill">AI Intergation</span>
+            <span class="experience-skill">AI Prompting</span>
+          </div>
+          <p>Designed immersive courses in Python and game development, fostering creativity through projects in 3D
+            modeling, Scratch, and interactive storytelling.</p>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <div>
+              <h3 class="experience-title">Software Engineer Trainer</h3>
+              <p class="experience-company">Formulatrix · Bootcamp Instructor</p>
+            </div>
+            <span class="experience-duration">Feb 2024 - Jun 2024 · 5 mos</span>
+          </div>
+          <div class="experience-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Salatiga, Indonesia · On-site</span>
+          </div>
+          <ul class="experience-description">
+            <li>Led intensive <strong>OOP bootcamp</strong> preparing trainees for engineering roles</li>
+            <li>Taught <strong>advanced C#/ASP.NET</strong> (encapsulation, inheritance, polymorphism)</li>
+            <li>Implemented <strong>industry design patterns</strong> (MVC, dependency injection)</li>
+            <li>Developed <strong>professional workflows</strong>: code reviews, debugging, CI/CD</li>
+          </ul>
+          <div class="experience-outcome">
+            <i class="fas fa-trophy"></i>
+            <span><strong>Result:</strong> 100% of graduates hired as Formulatrix engineers</span>
+          </div>
+          <div class="experience-skills">
+            <span class="experience-skill">C#</span>
+            <span class="experience-skill">ASP.NET</span>
+            <span class="experience-skill">OOP</span>
+            <span class="experience-skill">MVC</span>
+            <span class="experience-skill">DI</span>
+            <span class="experience-skill">Training</span>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <div>
+              <h3 class="experience-title">Coding Educator</h3>
+              <p class="experience-company">BrightChamps · Full-time</p>
+            </div>
+            <span class="experience-duration">Nov 2021 - Feb 2024 · 2 yrs 4 mos</span>
+          </div>
+          <div class="experience-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Pati, Central Java, Indonesia · Remote</span>
+          </div>
+          <ul style="margin-top: 1rem; padding-left: 1.5rem; line-height: 1.8;">
+            <li>Conducted online coding classes for students across various grade levels using Zoom and other virtual
+              teaching platforms</li>
+            <li>Designed and delivered interactive coding lessons that catered to diverse learning needs</li>
+            <li>Utilized creative teaching methods including gamification and real-world projects</li>
+            <li>Implemented a stable online learning environment by addressing technical issues</li>
+            <li>Collaborated with students and parents to facilitate seamless online learning</li>
+            <li>Evaluated student progress through projects, quizzes, and assignments</li>
+            <li>Organized virtual coding competitions and extracurricular coding clubs</li>
+          </ul>
+          <div class="experience-skills">
+            <span class="experience-skill">Scratch</span>
+            <span class="experience-skill">Web Development</span>
+            <span class="experience-skill">Training</span>
+            <span class="experience-skill">Python (Programming Language)</span>
+            <span class="experience-skill">Game Development</span>
+            <span class="experience-skill">3D</span>
+            <span class="experience-skill">Machine Learning</span>
+            <span class="experience-skill">Coding Experience</span>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <div>
+              <h3 class="experience-title">Artificial Intelligence Coach</h3>
+              <p class="experience-company">Orbit Future Academy · Contract</p>
+            </div>
+            <span class="experience-duration">Jun 2022 - Jan 2024 · 1 yr 8 mos</span>
+          </div>
+          <div class="experience-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Pati, Central Java, Indonesia</span>
+          </div>
+          <ul style="margin-top: 1rem; padding-left: 1.5rem; line-height: 1.8;">
+            <li>Designed and delivered comprehensive AI, data science, and machine learning curriculum tailored to high
+              school students' needs</li>
+            <li>Leveraged Google Colab and other industry-standard platforms to facilitate hands-on practical sessions
+            </li>
+            <li>Fostered a collaborative atmosphere where students actively participated in discussions</li>
+            <li>Tracked students' progress and provided individualized guidance</li>
+            <li>Organized guest lectures and workshops featuring AI industry professionals</li>
+            <li>Assisted students in developing and completing AI projects</li>
+          </ul>
+          <div class="experience-skills">
+            <span class="experience-skill">Training</span>
+            <span class="experience-skill">Data Visualization</span>
+            <span class="experience-skill">Computer Vision</span>
+            <span class="experience-skill">Graphic Design</span>
+            <span class="experience-skill">Natural Language Processing (NLP)</span>
+            <span class="experience-skill">Data Analysis</span>
+            <span class="experience-skill">Coaching</span>
+          </div>
+          <p>Led 1,200+ hours of training in machine learning, computer vision, and NLP using Google Colab.</p>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <div>
+              <h3 class="experience-title">Freelance Coding Educator</h3>
+              <p class="experience-company">Superprof · Part-time</p>
+            </div>
+            <span class="experience-duration">Mar 2021 - May 2022 · 1 yr 3 mos</span>
+          </div>
+          <div class="experience-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Pati, Central Java, Indonesia</span>
+          </div>
+          <div class="experience-skills">
+            <span class="experience-skill">Scratch</span>
+            <span class="experience-skill">Game Development</span>
+            <span class="experience-skill">Programming</span>
+            <span class="experience-skill">Code::Blocks</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+      <h2 class="section-title">Education</h2>
+      <div class="education-container">
+        <div class="education-item">
+          <h3 class="education-title">Universitas Jenderal Soedirman</h3>
+          <p class="education-degree">S.Kom, Teknik Komputer</p>
+          <span class="experience-duration">2017 - 2021</span>
+          <p class="education-grade">Grade: 3.63</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Organizations Section -->
+    <section class="section" id="organizations">
+      <h2 class="section-title">Organizations</h2>
+      <div class="org-container">
+        <div class="org-item">
+          <div class="org-header">
+            <div>
+              <h3 class="org-title">Generasi Baru Indonesia</h3>
+              <p class="org-position">Staff Media Komunikasi dan Informasi</p>
+            </div>
+            <span class="org-duration">Mar 2019 - Dec 2019</span>
+          </div>
+          <p class="org-description">Melakukan manajemen konten sosial media GenBI yang merupakan organisasi bentukan
+            penerima beasiswa BI dengan mengedepankan kegiatan yang bertujuan untuk memberdayakan kesehatan, ekonomi,
+            dan lingkungan masyarakat sektiar Purwokerto.</p>
+          <div class="org-association">
+            <i class="fas fa-university"></i>
+            <span>Associated with Universitas Jenderal Soedirman</span>
+          </div>
+        </div>
+
+        <div class="org-item">
+          <div class="org-header">
+            <div>
+              <h3 class="org-title">Himpunan Mahasiswa Teknik Informatika Universitas Jenderal Soedirman</h3>
+              <p class="org-position">Sekretaris umum</p>
+            </div>
+            <span class="org-duration">Mar 2019 - Dec 2019</span>
+          </div>
+          <p class="org-description">Membantu mengelola sistem administrasi di himpunan mahasiswa teknik informatika
+            Universitas Jenderal Soedirman, melakukan perencanaan dan dokumentasi tertulis setiap rapat pleno, melakukan
+            manajemen surat-menyurat baik internal maupun eksternal organisasi, menciptakan harmoni di dalam roda
+            organisasi dalam melakukan kegiatanya dengan mengatur timeline proposal, disposisi, dan LPJ dari tiap
+            kegiatan HIMATIF.</p>
+          <div class="org-association">
+            <i class="fas fa-university"></i>
+            <span>Associated with Universitas Jenderal Soedirman</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Subject">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/dewiidda/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/dewiidda"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p class="copyright">© 2025 Dewi Idda Rohmana. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // Theme toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+
+      themeToggle.addEventListener('click', () => {
+        document.body.setAttribute('data-theme',
+          document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+
+        if (document.body.getAttribute('data-theme') === 'light') {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+        } else {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+        }
+      });
+
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // 3D hover effect for cards
+      document.querySelectorAll('.experience-item, .education-item, .org-item').forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+          const rect = item.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const angleX = (y - centerY) / 20;
+          const angleY = (centerX - x) / 20;
+
+          item.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.03)`;
+        });
+
+        item.addEventListener('mouseleave', () => {
+          item.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+        });
+      });
+    </script>
+  </body>
+
+</html>
