@@ -1,0 +1,82 @@
+# ==============================
+# GABUNGAN .gitignore
+# Proyek 1: Edu-Performance Portal
+# Proyek 2: LexiGrade
+# Proyek 3: Algorithmic Visualizer
+# ==============================
+
+# ---- Python Umum ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# MyPy
+.mypy_cache/
+
+# Environment variables
+.env
+.env.*
+
+# ---- IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ==============================
+# PROYEK 1: Edu-Performance Portal
+# ==============================
+# Database SQLite
+*.db
+*.sqlite3
+
+
+# *.csv
+# !sample.csv
+# uploads/
+
+# ==============================
+# PROYEK 2: LexiGrade
+# ==============================
+# Model dan vectorizer hasil training
+*.pkl
+
+# data/*.csv
+# !data/sample.csv
+
+# ==============================
+# PROYEK 3: Algorithmic Visualizer
+# ==============================
+# Build output (jika menggunakan PyInstaller)
+dist/
+build/
+*.spec
