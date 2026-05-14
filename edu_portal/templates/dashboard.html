@@ -10,7 +10,7 @@
     <thead><tr><th>Nama</th><th>Rata-rata</th><th>Status</th></tr></thead>
     <tbody>
         {% for row in table %}
-        <tr class="{% if row.risk == 'Beresiko' %}table-danger{% else %}table-success{% endif %}">
+        <tr class="{% if row.risk == 'Remedial' %}table-danger{% else %}table-success{% endif %}">
             <td>{{ row.student }}</td>
             <td>{{ "%.1f"|format(row.score) }}</td>
             <td>{{ row.risk }}</td>

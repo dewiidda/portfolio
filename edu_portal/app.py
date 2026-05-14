@@ -71,8 +71,8 @@ def dashboard():
     chart_html = pio.to_html(fig, full_html=False)
     
     student_avg = df.groupby('student')['score'].mean().reset_index()
-    student_avg['risk'] = student_avg['score'].apply(lambda x: 'Beresiko' if x < 70 else 'Aman')
-    risk_fig = px.pie(student_avg, names='risk', title='Proporsi siswa beresiko (<70)')
+    student_avg['risk'] = student_avg['score'].apply(lambda x: 'Remedial' if x < 70 else 'Aman')
+    risk_fig = px.pie(student_avg, names='risk', title='Proporsi siswa remedial (<70)')
     risk_html = pio.to_html(risk_fig, full_html=False)
     
     return render_template('dashboard.html',
