@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Daftar Siswa</h2>
+<table class="table table-striped">
+    <thead><tr><th>ID</th><th>Nama</th><th>Kelas</th><th>Jumlah Nilai</th></tr></thead>
+    <tbody>
+        {% for s in students %}
+    <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.class_name }}</td>
+        <td>{{ s.grades|length }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
