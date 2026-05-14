@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Upload CSV Nilai</h2>
+<form action="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <input type="file" name="file" accept=".csv" class="form-control" required>
+    </div>
+    <button class="btn btn-success">Upload & Proses</button>
+</form>
+<p class="mt-2">Format CSV: <code>name,class,subject,score,semester,academic_year</code></p>
+{% endblock %}
