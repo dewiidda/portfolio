@@ -6,7 +6,7 @@ import plotly.io as pio
 from models import db, Student, Grade 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://edu_data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///edu_data.db'
 app.config['SECRET_KEY'] = 'rahasia'
 db.init_app(app)
 
@@ -22,14 +22,20 @@ def index():
 def upload():
     if request.method == 'POST':
         file = request.files.get('file')
+        
+        if not file or file.filename == "":
+            return "Tidak ada file yang dipilih", 400
+        
         if file and file.filename.endswith('.csv'):
             df = pd.read_csv(file)
-            for _, row in df.iterrows:
+            
+            for _, row in df.iterrows():
                 student = Student.query.filter_by(name=row['name'], class_name=row['class']).first()
                 if not student:
                     student = Student(name=row['name'], class_name=row['class'])
                     db.session.add(student)
                     db.session.flush()
+                    
                 grade = Grade(
                     student_id=student.id,
                     subject=row['subject'],
@@ -38,9 +44,11 @@ def upload():
                     academic_year=row.get('academic_year', '2025/2026')
                 )
                 db.session.add(grade)
+                
             db.session.commit()
             return redirect(url_for('index'))
-        return render_template('upload.html')
+        return "Format file harus .csv", 400
+    return render_template('upload.html')
 
 @app.route('/dashboard')
 def dashboard():
