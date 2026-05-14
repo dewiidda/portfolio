@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard Perform</h2>
+<div class="row">
+    <div class="col-md-8">{{ chart|safe }}</div>
+    <div class="col-md-4">{{ risk_chart|safe }}</div>
+</div>
+<h3 class="mt-4">Rata-rata siswa</h3>
+<table class="table table-bordered">
+    <thead><tr><th>Nama</th><th>Rata-rata</th><th>Status</th></tr></thead>
+    <tbody>
+        {% for row in table %}
+        <tr class="{% if row.risk == 'Beresiko' %}table-danger{% else %}table-success{% endif %}">
+            <td>{{ row.student }}</td>
+            <td>{{ "%.1f"|format(row.score) }}</td>
+            <td>{{ row.risk }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+    
