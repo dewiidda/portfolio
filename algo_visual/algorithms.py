@@ -1,3 +1,5 @@
+from random import random
+
 def bubble_sort(A):
     n = len(A)
     for i in range(n):
@@ -19,4 +21,3 @@ def linear_search(A, target=None):
         yield temp
         if A[i] == target:
             break
-        
