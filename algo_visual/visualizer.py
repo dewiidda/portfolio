@@ -1,12 +1,11 @@
 import sys
-import random
+from random import shuffle 
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QMainWindow,
     QVBoxLayout, QHBoxLayout, QPushButton,
-    QLabel, QSlider, QLineEdit, QTextEdit, QFileDialog, QComboBox
+    QLabel, QSlider, QComboBox
 )
-from PyQt5.QtCore import QTimer, Qt
-import matplotlib
+from PyQt5.QtCore import Qt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib import animation
@@ -16,24 +15,36 @@ class VisualizerWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Algorithmic Logic Visualizer")
-        self.algorithms = {"Bubble Sort": bubble_sort, "Linear Search": linear_search}
+        self.resize(1000, 600)
+
+        self.algorithms = {
+            "Bubble Sort": bubble_sort, 
+            "Linear Search": linear_search}
+        
         self.current_algorithm = bubble_sort
         self.data = list(range(1, 21))
-        random.shuffle(self.data)
+        shuffle(self.data)
         self.interval = 200 
 
+        self.setup_ui()
+        self.draw_initial()
+
+    def setup_ui(self):
         central = QWidget()
         self.setCentralWidget(central)
-        vbox = QVBoxLayout()
-        central.setLayout(vbox)
 
-        self.fig = Figure(figsize=(6,4))
+        main_layout = QVBoxLayout()
+        central.setLayout(main_layout)
+
+        self.fig = Figure(figsize=(8,5))
         self.canvas = FigureCanvas(self.fig)
-        vbox.addWidget(self.canvas)
+
+        main_layout.addWidget(self.canvas)
         self.ax = self.fig.add_subplot(111)
 
         controls = QHBoxLayout()
-        vbox.addLayout(controls)
+        main_layout.addLayout(controls)
+
         self.algo_select = QComboBox()
         self.algo_select.addItems(list(self.algorithms.keys()))
         self.algo_select.currentTextChanged.connect(self.change_algorithm)
@@ -56,13 +67,15 @@ class VisualizerWindow(QMainWindow):
         self.start_btn.clicked.connect(self.animate)
         controls.addWidget(self.start_btn)
 
-        self.draw_initial()
-
     def draw_initial(self):
         self.ax.clear()
-        self.bar_rects = self.ax.bar(range(len(self.data)), self.data, align="edge", color='skyblue')
+        self.bar_rects = self.ax.bar(
+            range(len(self.data)), 
+            self.data, 
+            align="edge", 
+            color="#094d51")
         self.ax.set_title(self.algo_select.currentText())
-        self.ax.set_xlim(0, len(self.data))
+        self.ax.set_xlim(-1, len(self.data))
         self.ax.set_ylim(0, max(self.data) + 5)
         self.canvas.draw()
 
@@ -71,7 +84,7 @@ class VisualizerWindow(QMainWindow):
         self.draw_initial()
 
     def shuffle_data(self):
-        random.shuffle(self.data)
+        shuffle(self.data)
         self.draw_initial()
 
     def change_speed(self, value):
@@ -80,14 +93,27 @@ class VisualizerWindow(QMainWindow):
     def animate(self):
         self.iterator = self.current_algorithm(self.data.copy())
         self.ani = animation.FuncAnimation(
-            self.fig, self.update_plot, fargs=(self.bar_rects,),
-            frames=self.iterator, interval=self.interval, repeat=False
+            self.fig, 
+            self.update_plot, 
+            fargs=(self.bar_rects,),
+            frames=self.iterator, 
+            interval=self.interval, 
+            repeat=False,
+            cache_frame_data=False
         )
-        self.canvas.draw()
+        self.canvas.draw_idle()
     
-    def update_plot(self, arr, bar_rects):
-        for rect, h in zip(bar_rects, arr):
-            rect.set_height(h)
+    def update_plot(self, frame, bars):
+        arr, active, found = frame
+        for rect, value in zip(bars, arr):
+            rect.set_height(value)
+            rect.set_color("#094d51")
+        if active:
+            for idx in active:
+                bars[idx].set_color("#f39c12")
+        if found is not None:
+            bars[found].set_color("#27ae60")
+        return bars
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

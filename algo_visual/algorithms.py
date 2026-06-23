@@ -1,23 +1,30 @@
-from random import random
+import random
 
-def bubble_sort(A):
+print("DEBUG RANDOM =", random)
+print("DEBUG FILE =", __file__)
+
+def bubble_sort(arr):
+    A = arr.copy()
     n = len(A)
+
     for i in range(n):
         swapped = False
-        for j in range(0, n-i-1):
+        for j in range(n-i-1):
             if A[j] > A[j+1]:
                 A[j], A[j+1] = A[j+1], A[j]
                 swapped = True
-            yield A
+            yield A.copy(), (j, j+1), None
         if not swapped:
             break
+    yield A.copy(), None, None
 
-def linear_search(A, target=None):
+def linear_search(arr, target=None):
+    A = arr.copy()
     if target is None:
         target = random.choice(A)
     for i in range(len(A)):
-        temp = list(A)
-        temp[i] = max(A) + 5
-        yield temp
         if A[i] == target:
-            break
+            yield A.copy(), (i,), i
+            return
+        yield A.copy(), (i,), None
+    yield A.copy(), None, None
